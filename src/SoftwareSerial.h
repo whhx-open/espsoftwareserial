@@ -268,10 +268,10 @@ public:
     void enableTx(bool on);
 
     // AVR compatibility methods.
-    bool listen() { enableRx(true); return true; }
+    bool listen() { if(m_oneWire)enableTx(false); else enableRx(true); return true; }
     void end();
     bool isListening() { return m_rxEnabled; }
-    bool stopListening() { enableRx(false); return true; }
+    bool stopListening() {if(m_oneWire)enableTx(true);else enableRx(false); return true; }
 
     /// onReceive sets a callback that will be called in interrupt context
     /// when data is received.

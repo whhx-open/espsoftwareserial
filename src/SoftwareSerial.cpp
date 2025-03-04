@@ -87,7 +87,7 @@ void UARTBase::begin(uint32_t baud, Config config,
     m_stopBits = 1 + ((config & 0300) ? 1 : 0);
     m_pduBits = m_dataBits + static_cast<bool>(m_parityMode) + m_stopBits;
     m_bitTicks = (microsToTicks(1000000UL) + baud / 2) / baud;
-    m_intTxEnabled = true;
+    m_intTxEnabled = false;
 }
 
 void UARTBase::beginRx(bool hasPullUp, int bufCapacity, int isrBufCapacity) {
@@ -122,15 +122,15 @@ void UARTBase::beginTx() {
 
 void UARTBase::end()
 {
-    enableRx(false);
-    m_txValid = false;
-    if (m_buffer) {
-        m_buffer.reset();
-    }
-    m_parityBuffer.reset();
-    if (m_isrBuffer) {
-        m_isrBuffer.reset();
-    }
+    //enableRx(false);
+    // m_txValid = false;
+    // if (m_buffer) {
+    //     m_buffer.reset();
+    // }
+    // m_parityBuffer.reset();
+    // if (m_isrBuffer) {
+    //     m_isrBuffer.reset();
+    // }
 }
 
 uint32_t UARTBase::baudRate() {
